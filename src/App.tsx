@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from "react-router";
 import IndexPage from "@/pages/index-page.tsx";
 import SignInPage from "@/pages/sign-in-page.tsx";
 import SignUpPage from "@/pages/sign-up-page.tsx";
+import CounterPage from "@/pages/counter-page.tsx";
 
 function AuthLayout() {
   return (
@@ -17,6 +18,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<IndexPage />} />
+      <Route path="/counter" element={<CounterPage />} />
 
       <Route element={<AuthLayout />}>
         <Route path="/sign-in" element={<SignInPage />} />
