@@ -3,6 +3,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // 서버 상태 관리 store라고 생각
 const queryClient = new QueryClient();
@@ -10,6 +11,7 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <App />
     </QueryClientProvider>
   </BrowserRouter>,
