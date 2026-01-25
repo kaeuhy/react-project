@@ -4,6 +4,9 @@ import type { Todo } from "@/types.ts";
 export async function createTodo(content: string) {
   const response = await fetch(`${API_URL}/todos`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       // id 생략시 자동으로 랜덤 값으로 자동으로 생성
       // id,

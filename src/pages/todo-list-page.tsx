@@ -1,7 +1,5 @@
 import TodoEditor from "@/components/todl-list/todo-editor.tsx";
 import TodoItem from "@/components/todl-list/todo-item.tsx";
-import { useQuery } from "@tanstack/react-query";
-import { fetchTodos } from "@/api/fetch-todos.ts";
 import { useTodosData } from "@/hooks/queries/use-todos-data.ts";
 
 export default function TodoListPage() {

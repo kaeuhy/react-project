@@ -6,41 +6,9 @@
       "isDone": true
     },
     {
-      "id": 2,
-      "content": "Todo 2",
-      "isDone": true
-    },
-    {
-      "id": 3,
-      "content": "Todo 3",
-      "isDone": true
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
-    },
-    {
-      "id": 11
-    },
-    {
-      "id": 12
+      "content": "123",
+      "isDone": true,
+      "id": 2
     }
   ]
 }
