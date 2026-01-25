@@ -6,7 +6,9 @@ export function useTodoDataById(id: number) {
     queryFn: () => fetchTodoById(id),
     queryKey: ["todos", id],
 
+    // stale time 설정
     staleTime: 5000,
+    gcTime: 5000,
 
     // 원하는 시점에서 stale data refetching
     // refetchOnMount: false,
