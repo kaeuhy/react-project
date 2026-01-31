@@ -914,3 +914,4 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,vs,visualstudio,visualstudiocode,macos,windows,react,vercel,node,git
 
 /.idea
+/.env
