@@ -1,10 +1,14 @@
 import { Button } from "@/components/ui/button.tsx";
 import { Link } from "react-router";
-import type { Todo } from "@/types.ts";
 import { useUpdateTodoMutation } from "@/hooks/mutations/use-update-todo-mutation.ts";
 import { useDeleteTodoMutation } from "@/hooks/mutations/use-delete-todo-mutation.ts";
+import { useTodoDataById } from "@/hooks/queries/use-todo-data-by-id.ts";
 
-export default function TodoItem({ id, content, isDone }: Todo) {
+export default function TodoItem({ id }: { id: string }) {
+  const { data: todo } = useTodoDataById(id, "LIST");
+  if (!todo) throw new Error("Todo Data Undefined");
+  const { content, isDone } = todo;
+
   // isPending을 추가하여 삭제 버튼을 눌렀을때 다른 버튼은 클릭이 안되게 진행
   const { mutate: deleteTodo, isPending: isDeleteTodoPending } =
     useDeleteTodoMutation();
@@ -32,7 +36,11 @@ export default function TodoItem({ id, content, isDone }: Todo) {
         />
         <Link to={`/todolist/${id}`}>{content}</Link>
       </div>
-      <Button disabled={isDeleteTodoPending} onClick={handleDeleteClick} variant={"destructive"}>
+      <Button
+        disabled={isDeleteTodoPending}
+        onClick={handleDeleteClick}
+        variant={"destructive"}
+      >
         삭제
       </Button>
     </div>

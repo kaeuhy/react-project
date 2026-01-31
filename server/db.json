@@ -1,9 +1,9 @@
 {
   "todos": [
     {
-      "id": 1,
-      "content": "Todo 1",
-      "isDone": true
+      "content": "왜 안됨?",
+      "isDone": false,
+      "id": 1
     }
   ]
 }

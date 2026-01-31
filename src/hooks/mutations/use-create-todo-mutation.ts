@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTodo } from "@/api/create-todo.ts";
 import { QUERY_KEYS } from "@/lib/constants.ts";
+import type { Todo } from "@/types.ts";
 
 export function useCreateTodoMutation() {
   const queryClient = useQueryClient();
@@ -13,12 +14,18 @@ export function useCreateTodoMutation() {
     // 요청이 종료
     onSettled: () => {},
     // 요청이 성공
-    onSuccess: () => {
-      // quertClient는 tanstack query의 store라고 생각
-      // 해당 store에서 todos를 invalidateQueries를 통해 무효화
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.todo.list,
-      });
+    onSuccess: (newTodo) => {
+      queryClient.setQueryData<Todo>(
+        QUERY_KEYS.todo.detail(newTodo.id),
+        newTodo,
+      );
+      queryClient.setQueryData<string[]>(
+        QUERY_KEYS.todo.list,
+        (prevTodoIds) => {
+          if (!prevTodoIds) return [newTodo.id];
+          return [...prevTodoIds, newTodo.id];
+        },
+      );
     },
     // 요청이 실패
     onError: (error) => {
