@@ -5,12 +5,24 @@ import { useState } from "react";
 import { useSignInWithPassword } from "@/hooks/mutations/use-sign-in-with-password.ts";
 import gitHubLogo from "@/assets/github-mark.svg";
 import { useSignInWithOauth } from "@/hooks/mutations/use-sign-in-with-oauth.ts";
+import { toast } from "sonner";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: signInWithPassword } = useSignInWithPassword();
+  // UI 로직
+  // setPassword는 지역 state이기에 다른 모듈로 보내려면 다음과 같이 콜백함수로 넘겨줘야힘 (옵션 객체)
+  const { mutate: signInWithPassword } = useSignInWithPassword({
+    onError: (error) => {
+      toast.error(error.message, {
+        position: "top-center"
+      });
+
+      // 로그인 실패시 "" 값 즉 빈 값으로 설정
+      setPassword("");
+    }
+  });
   const { mutate: signInWithOAuth } = useSignInWithOauth();
 
   const handleSignInWithPasswordClick = () => {
