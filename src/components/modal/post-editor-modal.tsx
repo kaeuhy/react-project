@@ -6,6 +6,7 @@ import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { useCreatePost } from "@/hooks/mutations/post/use-create-post.ts";
 import { toast } from "sonner";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel.tsx";
+import { useSession } from "@/store/session.ts";
 
 type Image = {
   file: File,
@@ -13,6 +14,7 @@ type Image = {
 }
 
 export default function PostEditorModal() {
+  const session = useSession();
   const { isOpen, close } = usePostEditorModal();
   const { mutate: createPost, isPending: isCreatePostPending } = useCreatePost({
     onSuccess: () => {
@@ -37,7 +39,11 @@ export default function PostEditorModal() {
 
   const handleCreatePostClick = () => {
     if (content.trim() === "") return;
-    createPost(content);
+    createPost({
+      content,
+      images: images.map((image) => image.file),
+      userId: session!.user.id
+    });
   };
 
   const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {
